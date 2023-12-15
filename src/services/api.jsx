@@ -13,3 +13,13 @@ export const fetchMoviesTrend = async () => {
   console.log(data);
   return data;
 };
+
+export const fetchMoviesById = async id => {
+  const { data } = await axios.get(`movie/${id}`, {
+    params: {
+      api_key: API_KEY,
+    },
+  });
+  console.log(data);
+  return data;
+};

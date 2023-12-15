@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Layout = () => {
   return (
-    <>
+    <StyledWrapper>
       <StyledHeader>
         <h1>Scorsese</h1>
         <nav>
@@ -12,8 +12,16 @@ const Layout = () => {
           <StyledNavLink to="/movies">Movie</StyledNavLink>
         </nav>
       </StyledHeader>
-      <Outlet />
-    </>
+      <StyledMainContent>
+        <Outlet />
+      </StyledMainContent>
+      <StyledFooter>
+        <h2>
+          Scorsese - we are the best in the world of free online movies and TV
+          series in good HD quality!
+        </h2>
+      </StyledFooter>
+    </StyledWrapper>
   );
 };
 
@@ -40,4 +48,24 @@ const StyledNavLink = styled(NavLink)`
     color: bisque;
     text-decoration: underline;
   }
+`;
+
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+const StyledMainContent = styled.div`
+  flex-grow: 1;
+  padding: 20px 0;
+`;
+
+const StyledFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  background-color: tomato;
+  font-size: 1.2rem;
 `;
