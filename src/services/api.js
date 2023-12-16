@@ -34,3 +34,27 @@ export const fetchMoviesBySearch = async inputValue => {
   console.log(data);
   return data.results;
 };
+
+export const fetchMoviesReviews = async id => {
+  const { data } = await axios.get(
+    `movie/${id}/reviews?language=en-US&page=1`,
+    {
+      params: {
+        api_key: API_KEY,
+      },
+    }
+  );
+  return data.results;
+};
+
+export const fetchMoviesCast = async id => {
+  const { data } = await axios.get(
+    `movie/${id}/credits?language=en-US&page=1`,
+    {
+      params: {
+        api_key: API_KEY,
+      },
+    }
+  );
+  return data;
+};

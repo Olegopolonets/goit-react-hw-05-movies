@@ -15,7 +15,7 @@ const Home = () => {
       <TrendingList>
         {movies.map(movie => (
           <TrendingItem key={movie.id}>
-            <StyledNavLink to={movie.id.toString()}>
+            <StyledNavLink to={`/movies/${movie.id.toString()}`}>
               {movie.poster_path === null ? (
                 <img
                   src={`https://content1.rozetka.com.ua/goods/images/big/342966749.jpg`}
