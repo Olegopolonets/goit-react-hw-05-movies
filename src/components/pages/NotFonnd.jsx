@@ -1,21 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NotFound = () => {
   return (
     <>
       <Wrapper>
-        <Link to="/">
-          <h2>This page is not available!</h2>
-          <p>Go home!</p>
+        <div>
+          <h2>
+            Nothing was found for your request. This page is not available,
+            error 404, capisce.
+          </h2>
+          <StyledNavLink to="/">
+            Sasuke <span> go back home!</span>
+          </StyledNavLink>
           <img
-            src="/src/img/notFound-img.gif"
+            // src="/src/img/notFound-img.gif"
+            src="https://media1.giphy.com/media/g01ZnwAUvutuK8GIQn/giphy.gif"
             alt="Not found"
-            width="200"
-            height="100"
+            width="700"
+            height="600"
           />
-        </Link>
+        </div>
       </Wrapper>
     </>
   );
@@ -29,4 +35,26 @@ const Wrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   padding-top: 50px;
+  text-decoration: none;
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+`;
+
+const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+
+  p {
+    font-size: 20px;
+    text-decoration: none;
+  }
+  span {
+    color: gold;
+    text-decoration: underline;
+  }
 `;

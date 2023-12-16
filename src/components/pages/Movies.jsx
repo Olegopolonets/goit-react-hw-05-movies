@@ -38,7 +38,8 @@ const Movie = () => {
             <StyledNavLink to={movie.id.toString()}>
               {movie.poster_path === null ? (
                 <img
-                  src={`https://content1.rozetka.com.ua/goods/images/big/342966749.jpg`}
+                  src={`https://upload.wikimedia.org/wikipedia/commons/c/c2/No_image_poster.png?20170513175923`}
+                  // src="/src/img/Poster_in_the_process.jpg"
                   alt={movie.title}
                 />
               ) : (
