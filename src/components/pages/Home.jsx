@@ -16,7 +16,14 @@ const Home = () => {
         {movies.map(movie => (
           <TrendingItem key={movie.id}>
             <StyledNavLink to={movie.id.toString()}>
-              <img src={`${imgLink + movie.poster_path}`} alt={movie.title} />
+              {movie.poster_path === null ? (
+                <img
+                  src={`https://content1.rozetka.com.ua/goods/images/big/342966749.jpg`}
+                  alt={movie.title}
+                />
+              ) : (
+                <img src={`${imgLink + movie.poster_path}`} alt={movie.title} />
+              )}
               <p>{movie.title}</p>
               <p>{movie.media_type}</p>
               <p>{movie.popularity}</p>
@@ -62,4 +69,10 @@ const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   color: black;
   font-weight: 700;
+
+  img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
 `;

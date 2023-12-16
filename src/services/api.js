@@ -23,3 +23,14 @@ export const fetchMoviesById = async id => {
   console.log(data);
   return data;
 };
+
+export const fetchMoviesBySearch = async inputValue => {
+  const { data } = await axios.get(`search/movie`, {
+    params: {
+      api_key: API_KEY,
+      query: inputValue,
+    },
+  });
+  console.log(data);
+  return data.results;
+};
