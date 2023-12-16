@@ -3,7 +3,7 @@ import Home from './pages/Home';
 import Movies from './pages/Movies';
 import Layout from './Layout';
 import MovieDetails from './pages/MovieDetails';
-import NotFound from './pages/NotFonnd';
+import NotFound from './pages/NotFound';
 
 export const App = () => {
   return (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { fetchMoviesTrend } from 'services/api';
 import styled from 'styled-components';
 const imgLink = 'https://image.tmdb.org/t/p/w500';
