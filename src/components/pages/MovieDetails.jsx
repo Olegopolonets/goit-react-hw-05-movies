@@ -1,10 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
 import { fetchMoviesById } from 'services/api';
 const imgLink = 'https://image.tmdb.org/t/p/w500';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
+  const location = useLocation();
+  console.log(location);
+  const navigate = useNavigate();
+  const goBackRef = useRef(location.state?.from ?? '/');
 
   const [movie, setMovie] = useState([null]);
 
@@ -12,8 +22,13 @@ const MovieDetails = () => {
     fetchMoviesById(movieId).then(res => setMovie(res));
   }, [movieId]);
 
+  const handleGoBack = () => {
+    navigate(goBackRef.current);
+  };
+
   return (
     <div>
+      <button onClick={handleGoBack}>Go back</button>
       <img
         src={movie.poster_path ? `${imgLink + movie.poster_path}` : ''}
         alt={movie.media_type}

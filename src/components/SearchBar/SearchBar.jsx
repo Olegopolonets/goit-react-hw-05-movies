@@ -2,7 +2,7 @@ import React from 'react';
 import { FaSearch } from 'react-icons/fa';
 import styled from 'styled-components';
 
-export const SearchBar = ({ onSubmit }) => {
+export const SearchBar = ({ onSubmit, onChange }) => {
   return (
     <Header>
       <FormSearch onSubmit={onSubmit}>
@@ -15,7 +15,13 @@ export const SearchBar = ({ onSubmit }) => {
           />
         </BtnSearch>
 
-        <InputSearch type="text" placeholder="Search movie" name="inputValue" />
+        <InputSearch
+          type="text"
+          placeholder="Search movie"
+          name="inputValue"
+          onChange={onChange}
+          required
+        />
       </FormSearch>
     </Header>
   );

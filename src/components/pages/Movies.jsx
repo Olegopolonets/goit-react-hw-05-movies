@@ -1,6 +1,6 @@
 import SearchBar from 'components/SearchBar/SearchBar';
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
 import { fetchMoviesBySearch } from 'services/api';
 import styled from 'styled-components';
 const imgLink = 'https://image.tmdb.org/t/p/w500';
@@ -8,7 +8,19 @@ const imgLink = 'https://image.tmdb.org/t/p/w500';
 const Movie = () => {
   const [inputValue, setInputValue] = useState('');
   const [moviesData, setMovies] = useState([]);
+  //
+  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+  console.log(location);
 
+  const movie = searchParams.get('movie') ?? '';
+
+  const updateQueryString = e => {
+    e.target.value !== ''
+      ? setSearchParams({ movie: e.target.value })
+      : setSearchParams({});
+  };
+  //
   useEffect(() => {
     async function getNewMovies() {
       try {
@@ -26,16 +38,16 @@ const Movie = () => {
     const inputValue = event.currentTarget.elements.inputValue.value;
     console.log(inputValue);
     setInputValue(inputValue);
-    setMovies([]);
+    setSearchParams('');
   };
 
   return (
     <>
-      <SearchBar onSubmit={onSubmit} />
+      <SearchBar onSubmit={onSubmit} onChange={updateQueryString} />
       <MovieList>
         {moviesData.map(movie => (
           <MovieItem key={movie.id}>
-            <StyledNavLink to={movie.id.toString()}>
+            <StyledNavLink state={{ from: location }} to={movie.id.toString()}>
               {movie.poster_path === null ? (
                 <img
                   src={`https://upload.wikimedia.org/wikipedia/commons/c/c2/No_image_poster.png?20170513175923`}

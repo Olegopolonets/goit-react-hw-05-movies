@@ -61,7 +61,7 @@ const StyledMainContent = styled.div`
   padding: 20px 0;
 `;
 
-const StyledFooter = styled.div`
+const StyledFooter = styled.footer`
   display: flex;
   justify-content: space-between;
   align-items: center;

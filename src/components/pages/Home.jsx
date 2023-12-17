@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
 import { fetchMoviesTrend } from 'services/api';
 import styled from 'styled-components';
 const imgLink = 'https://image.tmdb.org/t/p/w500';
 
 const Home = () => {
+  //
+  const location = useLocation();
+
+  //
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     fetchMoviesTrend().then(response => setMovies(response.results));
@@ -15,7 +19,10 @@ const Home = () => {
       <TrendingList>
         {movies.map(movie => (
           <TrendingItem key={movie.id}>
-            <StyledNavLink to={`/movies/${movie.id.toString()}`}>
+            <StyledNavLink
+              state={{ from: location }}
+              to={`/movies/${movie.id.toString()}`}
+            >
               {movie.poster_path === null ? (
                 <img
                   src={`https://content1.rozetka.com.ua/goods/images/big/342966749.jpg`}

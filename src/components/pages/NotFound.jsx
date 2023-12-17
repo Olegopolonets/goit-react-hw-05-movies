@@ -9,7 +9,7 @@ const NotFound = () => {
         <div>
           <h2>
             Nothing was found for your request. This page is not available,
-            error 404, capisce.
+            error 404, capisci.
           </h2>
           <StyledNavLink to="/">
             Sasuke <span> go back home!</span>
