@@ -7,6 +7,10 @@ import {
   useParams,
 } from 'react-router-dom';
 import { fetchMoviesById } from 'services/api';
+
+import s from './Mov.module.css';
+import { IoPlayCircleOutline } from 'react-icons/io5';
+
 const imgLink = 'https://image.tmdb.org/t/p/w500';
 
 const MovieDetails = () => {
@@ -29,11 +33,63 @@ const MovieDetails = () => {
   return (
     <div>
       <button onClick={handleGoBack}>Go back</button>
-      <img
-        src={movie.poster_path ? `${imgLink + movie.poster_path}` : ''}
-        alt={movie.media_type}
-      />
-      <p>{movie.title}</p>
+      <div className={s.filmWrapper}>
+        <div className={s.filmTrailer}>
+          {movie.poster_path === null ? (
+            <img
+              src={`https://upload.wikimedia.org/wikipedia/commons/c/c2/No_image_poster.png?20170513175923`}
+              // src="/src/img/Poster_in_the_process.jpg"
+              alt={movie.title}
+              className={s.poster}
+            />
+          ) : (
+            <img
+              src={`${imgLink + movie.poster_path}`}
+              alt={movie.title}
+              className={s.poster}
+            />
+          )}
+          <a
+            data-fancybox
+            href="https://www.youtube.com/watch?v=jNQXAC9IVRw"
+            class={s.trailerButton}
+          >
+            <IoPlayCircleOutline size={50} />
+            <span class={s.trailerButtonText}>Watch the trailer</span>
+          </a>
+        </div>
+        <div className={s.filmText}>
+          <h1 className={s.filmTitle}>{movie.title}</h1>
+          <span className={s.filmSubtitle}>{movie.tagline}</span>
+          <p className={s.filmDescription}>{movie.overview}</p>
+          <div className={s.aboutFilm}>
+            <span className={s.aboutText}>
+              <strong className={s.aboutTextBold}>Duration:</strong>
+              <span className={s.aboutTextReg}>{movie.runtime}min</span>
+            </span>
+            <span className={s.aboutText}>
+              <strong className={s.aboutTextBold}>Premiere:</strong>
+              <span className={s.aboutTextReg}>{movie.release_date}</span>
+            </span>
+          </div>
+          <div className={s.rating}>
+            <div className={s.filmRatingCounter}>
+              {movie.vote_average?.toFixed(1) * 10}%
+            </div>
+            <div>
+              <h3 className={s.ratingTitle}>Viewer rating</h3>
+              <span className={s.ratingText}>
+                Number of views:
+                <strong className={s.ratingTextBold}>{movie.popularity}</strong>
+              </span>
+              <span className={s.ratingText}>
+                Total votes:
+                <strong className={s.ratingTextBold}>{movie.vote_count}</strong>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
       <hr />
       <Link to="cast">Cast</Link>
       <Link to="reviews">Reviews</Link>

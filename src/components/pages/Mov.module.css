@@ -1,0 +1,407 @@
+/* film */
+
+.filmWrapper {
+  display: flex;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.filmTrailer {
+  display: flex;
+  flex-direction: column;
+  margin-right: 60px;
+}
+
+.poster {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  width: 358px;
+}
+
+.trailerButton {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  color: tomato;
+  border: 1px solid #d4d4d4;
+  border-radius: 0px 0px 5px 5px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.5s ease;
+}
+
+.trailerButton:hover {
+  background-color: tomato;
+  color: #fff;
+}
+
+.trailerButtonText {
+  font-size: 20px;
+}
+
+.trailer-button-icon {
+  margin-right: 14px;
+}
+
+.filmTitle {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 42px;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.filmSubtitle {
+  display: block;
+  margin-bottom: 32px;
+  color: #a5a5a5;
+  font-size: 22px;
+  line-height: 21px;
+}
+
+.filmDescription {
+  font-size: 20px;
+  line-height: 150%;
+  max-width: 600px;
+  color: #000000;
+  margin-bottom: 50px;
+}
+
+.aboutFilm {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-bottom: 40px;
+  font-size: 20px;
+}
+
+.aboutText {
+  display: flex;
+  gap: 10px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.filmRatingCounter {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid tomato;
+  border-radius: 10px;
+  margin-right: 28px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 33px;
+  color: tomato;
+}
+
+.ratingTitle {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 21px;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.ratingText {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  line-height: 20px;
+}
+
+.ratingTextBold {
+  font-weight: bold;
+}
+
+/* Актери и Создатели */
+
+/* news-cards */
+
+.news {
+  background: #f3f3f3;
+  padding-top: 70px;
+  padding-bottom: 100px;
+}
+
+.section-news-title {
+  font-weight: 900;
+  color: #000;
+  margin-bottom: 65px;
+}
+
+.news-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.news-card {
+  flex-basis: 23%;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 5px;
+}
+
+.news-date {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.news-title {
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 16px;
+  color: #000000;
+  margin-top: 14px;
+}
+
+.button-next {
+  display: none;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  cursor: pointer;
+}
+
+/* Adaptive */
+
+@media (max-width: 1200px) {
+  .container {
+    max-width: 960px;
+  }
+  .card-image {
+    width: 70px;
+    height: 70px;
+  }
+  .header {
+    height: 90px;
+    padding-left: 20px;
+  }
+  .sign-up {
+    padding-left: 20px;
+  }
+  .navigation {
+    margin-right: 20px;
+  }
+  .search-input {
+    margin-left: 20px;
+    margin-left: 20px;
+  }
+  .navigation-link {
+    margin-right: 10px;
+    font-size: 16px;
+  }
+  .header-logo::after {
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 991px) {
+  .container {
+    max-width: 760px;
+  }
+  .navigation {
+    display: none;
+  }
+  .search-input {
+    margin-right: auto;
+  }
+  .filmTitle {
+    font-size: 24px;
+    line-height: 1.4;
+  }
+  .filmSubtitle {
+    margin-bottom: 20px;
+  }
+  .filmDescription,
+  .aboutFilm {
+    margin-bottom: 20px;
+  }
+  .aboutTextBold {
+    display: block;
+    margin-bottom: 8px;
+  }
+  .aboutText {
+    display: block;
+  }
+  .card-image {
+    width: 100px;
+    height: 100px;
+  }
+  .card {
+    flex-basis: 50%;
+  }
+  .news-card {
+    flex-basis: 48%;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 560px;
+  }
+  .header {
+    height: 80px;
+  }
+  .m-menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    left: 0;
+    top: 68px;
+    right: 0;
+    bottom: 0;
+    height: calc(100% - 68px);
+    background: #5671f6;
+  }
+  .m-menu.active {
+    display: flex;
+  }
+  .navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+  .button-group {
+    height: auto;
+    flex-direction: column;
+  }
+  .search-input {
+    width: 260px;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    background-image: none;
+    margin: 0;
+  }
+  .navigation-link {
+    color: #fff;
+    margin-right: 0;
+    margin-bottom: 18px;
+  }
+  .navigation-link:last-child {
+    margin-bottom: 0;
+  }
+  .sign-up {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    margin-bottom: 30px;
+  }
+  .film {
+    padding-top: 50px;
+    padding-bottom: 60px;
+  }
+  .film-wrapper {
+    flex-wrap: wrap;
+  }
+  .filmText {
+    order: -1;
+    margin-bottom: 30px;
+  }
+  .cast {
+    padding-top: 50px;
+    padding-bottom: 70px;
+  }
+  .news {
+    padding-top: 50px;
+    padding-bottom: 70px;
+  }
+  .news-card {
+    width: 90%;
+  }
+  .button-next {
+    display: block;
+  }
+  .header-logo::after {
+    display: none;
+  }
+  .header {
+    padding-right: 2.5%;
+    padding-left: 2.5%;
+  }
+  .mobile-buttons {
+    display: block;
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    max-width: 95%;
+  }
+  .filmTitle {
+    font-size: 20px;
+    line-height: 23px;
+    margin-bottom: 12px;
+  }
+  .filmSubtitle {
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 26px;
+  }
+  .filmDescription {
+    font-size: 14px;
+    line-height: 150%;
+    margin-bottom: 40px;
+  }
+  .aboutFilm {
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-bottom: 40px;
+  }
+  .aboutTextBold {
+    display: inline-block;
+  }
+  .film-trailer,
+  .poster {
+    width: 100%;
+  }
+  .film-trailer {
+    margin-bottom: 30px;
+  }
+  .filmText {
+    order: 1;
+    margin-bottom: 0px;
+  }
+  .card {
+    flex-basis: 100%;
+    margin-bottom: 20px;
+  }
+  .card-image {
+    width: 60px;
+    height: 60px;
+  }
+  .tabs {
+    margin-bottom: 35px;
+  }
+  .cast {
+    margin-bottom: 50px;
+  }
+  .news-card {
+    flex-basis: 100%;
+  }
+}
