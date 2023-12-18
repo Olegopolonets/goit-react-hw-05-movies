@@ -55,10 +55,10 @@ const MovieDetails = () => {
               className={s.poster}
             />
           )}
-          <a data-fancybox onClick={onTrailer} className={s.trailerButton}>
+          <button onClick={onTrailer} className={s.trailerButton}>
             <IoPlayCircleOutline size={50} />
             <span className={s.trailerButtonText}>Watch the trailer</span>
-          </a>
+          </button>
         </div>
         <div className={s.filmText}>
           <h1 className={s.filmTitle}>{movie.title}</h1>
