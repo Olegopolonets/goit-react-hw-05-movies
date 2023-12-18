@@ -15,6 +15,8 @@ const Movie = () => {
 
   const movie = searchParams.get('movie') ?? '';
 
+  console.log(movie);
+
   const updateQueryString = e => {
     e.target.value !== ''
       ? setSearchParams({ movie: e.target.value })

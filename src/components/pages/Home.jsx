@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { fetchMoviesTrend } from 'services/api';
 import styled from 'styled-components';
 const imgLink = 'https://image.tmdb.org/t/p/w500';
@@ -33,7 +33,6 @@ const Home = () => {
               )}
               <p>{movie.title}</p>
               <p>{movie.media_type}</p>
-              <p>{movie.popularity}</p>
             </StyledNavLink>
           </TrendingItem>
         ))}

@@ -13,24 +13,21 @@ export const Reviews = () => {
   return (
     <div>
       <ReviewsList>
-        {reviews.map(item => (
-          <ReviewsItem key={item.id}>
-            <span>{item.author}</span>
-            <p>{item.content}</p>
-          </ReviewsItem>
-        ))}
+        {reviews.length !== 0 ? (
+          reviews.map(item => (
+            <ReviewsItem key={item.id}>
+              <span>{item.author}</span>
+              <p>{item.content}</p>
+            </ReviewsItem>
+          ))
+        ) : (
+          <h2>
+            There are currently no reviews. This movie has not yet had time to
+            talk about itself, but we hope that the reviews will be positive.
+          </h2>
+        )}
       </ReviewsList>
     </div>
-    //  {reviews ? (
-    //   reviews.map(item => (
-    //     <ReviewsItem key={item.id}>
-    //       <span>{item.author}</span>
-    //       <p>{item.content}</p>
-    //     </ReviewsItem>
-    //   ))
-    // ) : (
-    //   <h2>no</h2>
-    // )}
   );
 };
 
@@ -43,6 +40,11 @@ const ReviewsList = styled.ul`
   width: 80%;
   margin: 0 auto;
   list-style: none;
+  h2 {
+    line-height: 20px;
+    font-weight: 700;
+    font-size: 14px;
+  }
 `;
 
 const ReviewsItem = styled.li`
@@ -54,7 +56,6 @@ const ReviewsItem = styled.li`
   span {
     display: block;
     margin-bottom: 10px;
-    font-size: 14px;
     line-height: 16px;
     font-weight: 900;
     font-size: 14px;
