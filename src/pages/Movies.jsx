@@ -1,31 +1,46 @@
+import SearchBar from 'components/SearchBar/SearchBar';
 import React, { useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-import { fetchMoviesTrend } from 'services/api';
+import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
+import { fetchMoviesBySearch } from 'services/api';
+import imgMovieDefault from '../img/Poster_in_the_process.jpg';
 import styled from 'styled-components';
 const imgLink = 'https://image.tmdb.org/t/p/w500';
 
-const Home = () => {
-  //
+const Movie = () => {
+  const [moviesData, setMovies] = useState([]);
+
+  const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
 
-  //
-  const [movies, setMovies] = useState([]);
+  const movie = searchParams.get('movie') ?? '';
+
+  const updateQueryString = query => {
+    query !== '' ? setSearchParams({ movie: query }) : setSearchParams({});
+  };
+
   useEffect(() => {
-    fetchMoviesTrend().then(response => setMovies(response.results));
-  }, []);
+    async function getNewMovies() {
+      try {
+        const moviesDataNew = await fetchMoviesBySearch(movie);
+        setMovies(moviesDataNew);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getNewMovies();
+  }, [movie]);
+
   return (
     <>
-      <h1>Today's trends</h1>
-      <TrendingList>
-        {movies.map(movie => (
-          <TrendingItem key={movie.id}>
-            <StyledNavLink
-              state={{ from: location }}
-              to={`/movies/${movie.id.toString()}`}
-            >
+      <SearchBar setQuery={updateQueryString} />
+      <MovieList>
+        {moviesData.map(movie => (
+          <MovieItem key={movie.id}>
+            <StyledNavLink state={{ from: location }} to={movie.id.toString()}>
               {movie.poster_path === null ? (
                 <img
-                  src={`https://content1.rozetka.com.ua/goods/images/big/342966749.jpg`}
+                  src={imgMovieDefault}
+                  // src="/src/img/Poster_in_the_process.jpg"
                   alt={movie.title}
                 />
               ) : (
@@ -34,16 +49,16 @@ const Home = () => {
               <p>{movie.title}</p>
               <p>{movie.media_type}</p>
             </StyledNavLink>
-          </TrendingItem>
+          </MovieItem>
         ))}
-      </TrendingList>
+      </MovieList>
     </>
   );
 };
 
-export default Home;
+export default Movie;
 
-const TrendingList = styled.ul`
+const MovieList = styled.ul`
   display: grid;
   max-width: calc(100vw - 200px);
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -56,10 +71,10 @@ const TrendingList = styled.ul`
   margin-right: auto;
 `;
 
-const TrendingItem = styled.li`
+const MovieItem = styled.li`
   display: flex;
   flex-direction: column;
-
+  /* width: 20%; */
   padding: 10px;
   border: 2px solid silver;
   transition: transform 0.5s ease;

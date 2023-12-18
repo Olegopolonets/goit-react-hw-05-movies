@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import {
   NavLink,
   Outlet,
@@ -16,9 +16,8 @@ const imgLink = 'https://image.tmdb.org/t/p/w500';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
-  //
+
   const location = useLocation();
-  console.log(location);
   const navigate = useNavigate();
   const goBackRef = useRef(location.state?.from ?? '/');
 
@@ -108,7 +107,9 @@ const MovieDetails = () => {
         <StyledNavLink to="cast">Cast</StyledNavLink>
         <StyledNavLink to="reviews">Reviews</StyledNavLink>
       </NavLinkWrapper>
-      <Outlet />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };
@@ -132,6 +133,9 @@ const StyledNavLink = styled(NavLink)`
   &.active {
     color: tomato;
     text-decoration: underline;
+  }
+  &:hover {
+    color: tomato;
   }
 `;
 

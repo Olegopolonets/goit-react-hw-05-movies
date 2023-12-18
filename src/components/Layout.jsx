@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -12,9 +12,13 @@ const Layout = () => {
           <StyledNavLink to="/movies">Movie</StyledNavLink>
         </nav>
       </StyledHeader>
-      <StyledMainContent>
-        <Outlet />
-      </StyledMainContent>
+
+      <Suspense fallback={<div>Loading...</div>}>
+        <StyledMainContent>
+          <Outlet />
+        </StyledMainContent>
+      </Suspense>
+
       <StyledFooter>
         <h2>
           Scorsese - we are the best in the world of free online movies and TV

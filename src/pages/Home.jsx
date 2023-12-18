@@ -1,48 +1,31 @@
-import SearchBar from 'components/SearchBar/SearchBar';
 import React, { useEffect, useState } from 'react';
-import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
-import { fetchMoviesBySearch } from 'services/api';
-import imgMovieDefault from '../../img/Poster_in_the_process.jpg';
+import { NavLink, useLocation } from 'react-router-dom';
+import { fetchMoviesTrend } from 'services/api';
 import styled from 'styled-components';
 const imgLink = 'https://image.tmdb.org/t/p/w500';
 
-const Movie = () => {
-  const [moviesData, setMovies] = useState([]);
+const Home = () => {
   //
-  const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
-  console.log(location);
 
-  const movie = searchParams.get('movie') ?? '';
-
-  console.log(movie);
-  const updateQueryString = query => {
-    query !== '' ? setSearchParams({ movie: query }) : setSearchParams({});
-  };
   //
+  const [movies, setMovies] = useState([]);
   useEffect(() => {
-    async function getNewMovies() {
-      try {
-        const moviesDataNew = await fetchMoviesBySearch(movie);
-        setMovies(moviesDataNew);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getNewMovies();
-  }, [movie]);
-
+    fetchMoviesTrend().then(response => setMovies(response.results));
+  }, []);
   return (
     <>
-      <SearchBar setQuery={updateQueryString} />
-      <MovieList>
-        {moviesData.map(movie => (
-          <MovieItem key={movie.id}>
-            <StyledNavLink state={{ from: location }} to={movie.id.toString()}>
+      <TrendingTitle>Today's trends</TrendingTitle>
+      <TrendingList>
+        {movies.map(movie => (
+          <TrendingItem key={movie.id}>
+            <StyledNavLink
+              state={{ from: location }}
+              to={`/movies/${movie.id.toString()}`}
+            >
               {movie.poster_path === null ? (
                 <img
-                  src={imgMovieDefault}
-                  // src="/src/img/Poster_in_the_process.jpg"
+                  src={`https://content1.rozetka.com.ua/goods/images/big/342966749.jpg`}
                   alt={movie.title}
                 />
               ) : (
@@ -51,16 +34,16 @@ const Movie = () => {
               <p>{movie.title}</p>
               <p>{movie.media_type}</p>
             </StyledNavLink>
-          </MovieItem>
+          </TrendingItem>
         ))}
-      </MovieList>
+      </TrendingList>
     </>
   );
 };
 
-export default Movie;
+export default Home;
 
-const MovieList = styled.ul`
+const TrendingList = styled.ul`
   display: grid;
   max-width: calc(100vw - 200px);
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -73,10 +56,10 @@ const MovieList = styled.ul`
   margin-right: auto;
 `;
 
-const MovieItem = styled.li`
+const TrendingItem = styled.li`
   display: flex;
   flex-direction: column;
-  /* width: 20%; */
+
   padding: 10px;
   border: 2px solid silver;
   transition: transform 0.5s ease;
@@ -86,6 +69,11 @@ const MovieItem = styled.li`
     /* transform: rotate(1deg); */
     /* transform: matrix(0, 1, 1, 0, 0, 0); */
   }
+`;
+
+const TrendingTitle = styled.h1`
+  text-align: center;
+  margin: 20px auto;
 `;
 
 const StyledNavLink = styled(NavLink)`

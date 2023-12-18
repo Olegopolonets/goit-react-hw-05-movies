@@ -10,7 +10,6 @@ export const fetchMoviesTrend = async () => {
       api_key: API_KEY,
     },
   });
-  console.log(data);
   return data;
 };
 
@@ -20,7 +19,6 @@ export const fetchMoviesById = async id => {
       api_key: API_KEY,
     },
   });
-  console.log(data);
   return data;
 };
 
@@ -31,7 +29,6 @@ export const fetchMoviesBySearch = async inputValue => {
       query: inputValue,
     },
   });
-  console.log(data);
   return data.results;
 };
 
@@ -44,7 +41,6 @@ export const fetchMoviesReviews = async id => {
       },
     }
   );
-  console.log('Reviews', data.results);
   return data.results;
 };
 
@@ -57,6 +53,5 @@ export const fetchMoviesCast = async id => {
       },
     }
   );
-  console.log('cast', data.cast);
   return data;
 };
