@@ -2,11 +2,11 @@ import SearchBar from 'components/SearchBar/SearchBar';
 import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
 import { fetchMoviesBySearch } from 'services/api';
+import imgDefault from '../../img/Poster_in_the_process.jpg';
 import styled from 'styled-components';
 const imgLink = 'https://image.tmdb.org/t/p/w500';
 
 const Movie = () => {
-  const [inputValue, setInputValue] = useState('');
   const [moviesData, setMovies] = useState([]);
   //
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,43 +16,32 @@ const Movie = () => {
   const movie = searchParams.get('movie') ?? '';
 
   console.log(movie);
-
-  const updateQueryString = e => {
-    e.target.value !== ''
-      ? setSearchParams({ movie: e.target.value })
-      : setSearchParams({});
+  const updateQueryString = query => {
+    query !== '' ? setSearchParams({ movie: query }) : setSearchParams({});
   };
   //
   useEffect(() => {
     async function getNewMovies() {
       try {
-        const moviesDataNew = await fetchMoviesBySearch(inputValue);
+        const moviesDataNew = await fetchMoviesBySearch(movie);
         setMovies(moviesDataNew);
       } catch (error) {
         console.log(error);
       }
     }
     getNewMovies();
-  }, [inputValue]);
-
-  const onSubmit = event => {
-    event.preventDefault();
-    const inputValue = event.currentTarget.elements.inputValue.value;
-    console.log(inputValue);
-    setInputValue(inputValue);
-    setSearchParams('');
-  };
+  }, [movie]);
 
   return (
     <>
-      <SearchBar onSubmit={onSubmit} onChange={updateQueryString} />
+      <SearchBar setQuery={updateQueryString} />
       <MovieList>
         {moviesData.map(movie => (
           <MovieItem key={movie.id}>
             <StyledNavLink state={{ from: location }} to={movie.id.toString()}>
               {movie.poster_path === null ? (
                 <img
-                  src={`https://upload.wikimedia.org/wikipedia/commons/c/c2/No_image_poster.png?20170513175923`}
+                  src={imgDefault}
                   // src="/src/img/Poster_in_the_process.jpg"
                   alt={movie.title}
                 />

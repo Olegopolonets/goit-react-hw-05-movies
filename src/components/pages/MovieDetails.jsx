@@ -10,11 +10,13 @@ import { fetchMoviesById } from 'services/api';
 
 import s from './Mov.module.css';
 import { IoPlayCircleOutline } from 'react-icons/io5';
+import moment from 'moment';
 
 const imgLink = 'https://image.tmdb.org/t/p/w500';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
+  //
   const location = useLocation();
   console.log(location);
   const navigate = useNavigate();
@@ -80,7 +82,8 @@ const MovieDetails = () => {
             <span className={s.aboutText}>
               <strong className={s.aboutTextBold}>Premiere:</strong>
               <p className={s.aboutTextReg}>
-                {new Date(movie.release_date).toLocaleDateString()}
+                {/* {new Date(movie.release_date).toLocaleDateString()} */}
+                {moment(movie.release_date).format('DD MMMM YYYY')}
               </p>
             </span>
           </div>

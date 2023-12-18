@@ -1,8 +1,17 @@
 import React from 'react';
+import { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import styled from 'styled-components';
 
-export const SearchBar = ({ onSubmit, onChange }) => {
+export const SearchBar = ({ setQuery }) => {
+  const [inputValue, setInputValue] = useState('');
+
+  const onSubmit = event => {
+    event.preventDefault();
+
+    setQuery(inputValue);
+  };
+
   return (
     <Header>
       <FormSearch onSubmit={onSubmit}>
@@ -19,7 +28,8 @@ export const SearchBar = ({ onSubmit, onChange }) => {
           type="text"
           placeholder="Search movie"
           name="inputValue"
-          onChange={onChange}
+          value={inputValue}
+          onChange={e => setInputValue(e.target.value)}
           required
         />
       </FormSearch>
