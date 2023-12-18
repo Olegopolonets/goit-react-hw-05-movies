@@ -45,7 +45,7 @@ const StyledNavLink = styled(NavLink)`
   color: black;
   font-weight: 700;
   &.active {
-    color: bisque;
+    color: white;
     text-decoration: underline;
   }
 `;

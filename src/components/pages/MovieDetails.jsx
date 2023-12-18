@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  Link,
+  NavLink,
   Outlet,
   useLocation,
   useNavigate,
   useParams,
 } from 'react-router-dom';
 import { fetchMoviesById } from 'services/api';
-
 import s from './Mov.module.css';
 import { IoPlayCircleOutline } from 'react-icons/io5';
 import moment from 'moment';
+import styled from 'styled-components';
 
 const imgLink = 'https://image.tmdb.org/t/p/w500';
 
@@ -32,9 +32,13 @@ const MovieDetails = () => {
     navigate(goBackRef.current);
   };
 
+  const onTrailer = () => {
+    alert('Sorry, not implemented yet.');
+  };
+
   return (
     <div>
-      <button onClick={handleGoBack}>Go back</button>
+      <ButtonGoBack onClick={handleGoBack}>Go back</ButtonGoBack>
       <div className={s.filmWrapper}>
         <div className={s.filmTrailer}>
           {movie.poster_path === null ? (
@@ -51,11 +55,7 @@ const MovieDetails = () => {
               className={s.poster}
             />
           )}
-          <a
-            data-fancybox
-            href="https://www.youtube.com/watch?v=jNQXAC9IVRw"
-            className={s.trailerButton}
-          >
+          <a data-fancybox onClick={onTrailer} className={s.trailerButton}>
             <IoPlayCircleOutline size={50} />
             <span className={s.trailerButtonText}>Watch the trailer</span>
           </a>
@@ -82,7 +82,6 @@ const MovieDetails = () => {
             <span className={s.aboutText}>
               <strong className={s.aboutTextBold}>Premiere:</strong>
               <p className={s.aboutTextReg}>
-                {/* {new Date(movie.release_date).toLocaleDateString()} */}
                 {moment(movie.release_date).format('DD MMMM YYYY')}
               </p>
             </span>
@@ -105,13 +104,50 @@ const MovieDetails = () => {
           </div>
         </div>
       </div>
-      <hr />
-      <Link to="cast">Cast</Link>
-      <Link to="reviews">Reviews</Link>
-
+      <NavLinkWrapper>
+        <StyledNavLink to="cast">Cast</StyledNavLink>
+        <StyledNavLink to="reviews">Reviews</StyledNavLink>
+      </NavLinkWrapper>
       <Outlet />
     </div>
   );
 };
 
 export default MovieDetails;
+
+const NavLinkWrapper = styled.div`
+  margin: 30px auto;
+  width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+  font-size: 30px;
+  margin-left: 10px;
+  &.active {
+    color: tomato;
+    text-decoration: underline;
+  }
+`;
+
+const ButtonGoBack = styled.button`
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 2px solid tomato;
+  background-color: tomato;
+  color: white;
+  font-size: 20px;
+  margin-left: 20px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+
+  &:hover {
+    background-color: white;
+    color: tomato;
+  }
+`;

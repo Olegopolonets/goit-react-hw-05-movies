@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMoviesCast } from 'services/api';
 import styled from 'styled-components';
+import imgActorDefault from '../../img/actor-cast.png';
+
 const imgLink = 'https://image.tmdb.org/t/p/w500';
 
 const Cast = () => {
@@ -14,28 +16,32 @@ const Cast = () => {
   return (
     <>
       <CastList>
-        {cast.map(item => (
-          <Card key={item.id}>
-            {item.profile_path === null ? (
-              <ActorImg
-                src={`https://upload.wikimedia.org/wikipedia/commons/c/c2/No_image_poster.png?20170513175923`}
-                alt={item.original_name}
-              />
-            ) : (
-              <ActorImg
-                src={`${imgLink + item.profile_path}`}
-                alt={item.original_name}
-              />
-            )}
+        {cast.length !== 0 ? (
+          cast.map(item => (
+            <Card key={item.id}>
+              {item.profile_path === null ? (
+                <ActorImg src={imgActorDefault} alt={item.original_name} />
+              ) : (
+                <ActorImg
+                  src={`${imgLink + item.profile_path}`}
+                  alt={item.original_name}
+                />
+              )}
 
-            <div>
-              <h3>{item.name}</h3>
-              <span>
-                <b>Role:</b> {item.character}
-              </span>
-            </div>
-          </Card>
-        ))}
+              <div>
+                <h3>{item.name}</h3>
+                <span>
+                  <b>Role:</b> {item.character}
+                </span>
+              </div>
+            </Card>
+          ))
+        ) : (
+          <h2>
+            We do not have information about the cast, or they have wished to
+            remain anonymous.
+          </h2>
+        )}
       </CastList>
     </>
   );
@@ -48,6 +54,11 @@ const CastList = styled.ul`
   flex-wrap: wrap;
   width: 80%;
   margin: 0 auto;
+  h2 {
+    line-height: 20px;
+    font-weight: 700;
+    font-size: 14px;
+  }
 `;
 
 const Card = styled.li`

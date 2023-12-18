@@ -2,7 +2,7 @@ import SearchBar from 'components/SearchBar/SearchBar';
 import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
 import { fetchMoviesBySearch } from 'services/api';
-import imgDefault from '../../img/Poster_in_the_process.jpg';
+import imgMovieDefault from '../../img/Poster_in_the_process.jpg';
 import styled from 'styled-components';
 const imgLink = 'https://image.tmdb.org/t/p/w500';
 
@@ -41,7 +41,7 @@ const Movie = () => {
             <StyledNavLink state={{ from: location }} to={movie.id.toString()}>
               {movie.poster_path === null ? (
                 <img
-                  src={imgDefault}
+                  src={imgMovieDefault}
                   // src="/src/img/Poster_in_the_process.jpg"
                   alt={movie.title}
                 />
@@ -50,7 +50,6 @@ const Movie = () => {
               )}
               <p>{movie.title}</p>
               <p>{movie.media_type}</p>
-              <p>{movie.popularity}</p>
             </StyledNavLink>
           </MovieItem>
         ))}
