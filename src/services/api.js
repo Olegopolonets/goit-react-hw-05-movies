@@ -44,6 +44,7 @@ export const fetchMoviesReviews = async id => {
       },
     }
   );
+  console.log('Reviews', data.results);
   return data.results;
 };
 
@@ -56,5 +57,6 @@ export const fetchMoviesCast = async id => {
       },
     }
   );
+  console.log('cast', data.cast);
   return data;
 };

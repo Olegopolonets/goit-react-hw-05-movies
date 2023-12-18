@@ -52,24 +52,36 @@ const MovieDetails = () => {
           <a
             data-fancybox
             href="https://www.youtube.com/watch?v=jNQXAC9IVRw"
-            class={s.trailerButton}
+            className={s.trailerButton}
           >
             <IoPlayCircleOutline size={50} />
-            <span class={s.trailerButtonText}>Watch the trailer</span>
+            <span className={s.trailerButtonText}>Watch the trailer</span>
           </a>
         </div>
         <div className={s.filmText}>
           <h1 className={s.filmTitle}>{movie.title}</h1>
+
           <span className={s.filmSubtitle}>{movie.tagline}</span>
           <p className={s.filmDescription}>{movie.overview}</p>
           <div className={s.aboutFilm}>
             <span className={s.aboutText}>
+              <strong className={s.aboutTextBold}>Genres:</strong>
+
+              {movie.genres?.map(item => (
+                <span className={s.aboutTextReg} key={item.id}>
+                  {item.name}.
+                </span>
+              ))}
+            </span>
+            <span className={s.aboutText}>
               <strong className={s.aboutTextBold}>Duration:</strong>
-              <span className={s.aboutTextReg}>{movie.runtime}min</span>
+              <span className={s.aboutTextReg}>{movie.runtime} min</span>
             </span>
             <span className={s.aboutText}>
               <strong className={s.aboutTextBold}>Premiere:</strong>
-              <span className={s.aboutTextReg}>{movie.release_date}</span>
+              <p className={s.aboutTextReg}>
+                {new Date(movie.release_date).toLocaleDateString()}
+              </p>
             </span>
           </div>
           <div className={s.rating}>
